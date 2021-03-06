@@ -67,21 +67,23 @@ const UpdatePlace = (props) => {
     const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
 
     useEffect(() => {
-        setFormData(
-            {
-            title: {
-                value: identifiedPlace.title,
-                isValid: true
-            },
-            description: {
-                value: identifiedPlace.description,
-                isValid: true
-            }
-        }, 
-        true
-        );
+        if (identifiedPlace) {
+            setFormData(
+                {
+                title: {
+                    value: identifiedPlace.title,
+                    isValid: true
+                },
+                description: {
+                    value: identifiedPlace.description,
+                    isValid: true
+                }
+            }, 
+            true
+            );
+        }        
         setIsLoading(false);
-    }, [setFormData, identifiedPlace])
+    }, [setFormData, identifiedPlace]) 
 
     const placeUpdateSubmitHandler = (event) => {
         event.preventDefault();
@@ -89,11 +91,11 @@ const UpdatePlace = (props) => {
     }
 
     if (isLoading) {
-        return <div className="center"><h2>Couldn't find place!</h2></div>
+        return <div className="center"><h2>Loading...</h2></div>        
     }
 
     if (!formState.inputs.title.value) {
-        return <div className="center"><h2>Loading...</h2></div>
+        return <div className="center"><h2>Couldn't find place!</h2></div>
     } 
 
         return (
