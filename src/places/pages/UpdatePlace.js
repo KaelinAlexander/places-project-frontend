@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
+import Card from '../../shared/components/UIElements/Card';
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 
@@ -95,7 +96,13 @@ const UpdatePlace = (props) => {
     }
 
     if (!formState.inputs.title.value) {
-        return <div className="center"><h2>Couldn't find place!</h2></div>
+        return (
+            <div className="center">
+                <Card> 
+                    <h2>Couldn't find place!</h2>
+                </Card>
+            </div>        
+        )
     } 
 
         return (
