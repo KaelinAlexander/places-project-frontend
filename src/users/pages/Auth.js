@@ -7,7 +7,7 @@ import { useForm } from '../../shared/hooks/form-hook'
 import './Auth.css'
 
 const Auth = () => {
-    const [formState, inputHandler] = useForm({
+    const [formState, inputHandler, setFormData] = useForm({
         email: {
             value: '',
             isValid: false
@@ -21,6 +21,23 @@ const Auth = () => {
     const [isLoginMode, setIsLoginMode] = useState(true);
 
     const switchModeHandler = (event) => {
+        if (!isLoginMode) {
+            setFormData(
+                {
+                name: undefined
+            }
+            , formState.inputs.email.isValid && formState.inputs.password.isValid 
+            );
+            setFormData(
+                {
+                ...formState.inputs,
+                name: {
+                    value: '',
+                    isValid: false
+                }
+            }, false);
+
+        }
         setIsLoginMode(prevMode => !prevMode);
     }
 
